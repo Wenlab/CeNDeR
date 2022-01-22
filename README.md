@@ -28,7 +28,7 @@ Download *models* folder ([Google drive](https://drive.google.com/drive/folders/
 CUDA_LAUNCH_BLOCKING=1 CUDA_VISIBLE_DEVICES=0 python pipeline_infer.py --det-fp16 --volume-window 4 --load-preprocess-result-root data/traces_data/proofreading --process-stack-root data/traces_data/raw --det-model-load-path models/det_model.ckpt --rec-model-load-path models/rec_model.ckpt --json-store-root data/traces_result
 ```
 
-The Calcium dynamics (GCaMP data will release soon) from an 80-second period of $140$ neurons:
+The Calcium dynamics (GCaMP data will release soon) from an 80-second period of 140 neurons:
 
 ![traces](figs/traces.png)
 
@@ -106,7 +106,7 @@ Notes:
 
 - MATLAB is a one-based numbering lanuage, but Python is zero-based. Human annotation (.mat) and final results (.json) number start from 1, but the pre-processing result (.json) starts from 0.
 
-- You will get $140$ processed neurons (id $≤ 1001$), and the extra class (id $> 1001$) in final results (.json, one-based) . Please check [id_map.py](https://github.com/Wenlab/CenDer/blob/main/recognition/inference/id_map.py) for mapping (zero-based). 
+- You will get 140 processed neurons (id ≤ 1001), and the extra class (id > 1001) in final results (.json, one-based) . Please check [id_map.py](https://github.com/Wenlab/CenDer/blob/main/recognition/inference/id_map.py) for mapping (zero-based). 
 
 #### Model training
 
