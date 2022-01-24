@@ -113,7 +113,7 @@ Notes:
 Detection training example:
 
 ```shell
-CUDA_LAUNCH_BLOCKING=1 CUDA_VISIBLE_DEVICES=0 python detection/det_train.py --process-stack-root data/dataset/raw --load-preprocess-result-root data/dataset/proofreading2 --label-root data/dataset/label --det-num-workers 4 --det-patches-size 15 31 41 81 --det-anchors-size 9 --lr 0.05 --num-epochs 205 --det-tensorboard-root tb_log/det --det-model-save-path models 
+CUDA_LAUNCH_BLOCKING=1 CUDA_VISIBLE_DEVICES=0 python detection/det_train.py --process-stack-root data/dataset/raw --load-preprocess-result-root data/dataset/proofreading --label-root data/dataset/label --det-num-workers 4 --det-patches-size 15 31 41 81 --det-anchors-size 9 --lr 0.05 --num-epochs 205 --det-tensorboard-root tb_log/det --det-model-save-path models
 ```
 
 Recognition training example:
