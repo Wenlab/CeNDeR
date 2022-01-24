@@ -45,7 +45,7 @@ To improve accuracy, one should tune pre-processing results (e.g., *C. elegans* 
 1. Pre-processing stage inference
 
 ```shell
-python infer.py --only-preprocessing --preprocessing-mode 6 --process-stack-root data/traces_data/raw --save-preprocess-result-root data/traces_data/raw_proofreading
+python pipeline_infer.py --only-preprocessing --preprocessing-mode 6 --process-stack-root data/traces_data/raw --save-preprocess-result-root data/traces_data/raw_proofreading
 ```
 
 2. Using [LABELME](https://github.com/wkentaro/labelme) (version 4.5.7) to tune

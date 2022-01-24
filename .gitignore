@@ -138,4 +138,7 @@ models/*.ckpt
 # Data
 data/*
 
+# Shell file
+*.sh
+
 
