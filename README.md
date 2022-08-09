@@ -8,7 +8,7 @@ Processing pipeline, dataset for “[*Rapid detection and recognition of whole b
 
 **`2022-02-15`**:  We have fixed Memory problem for long-term recording inference.
 
-**`2022-08-03`**:  We have released inference and recognition training jupyter notebooks, and moved annotation and human proofreading toolkit into [CeNDeR-annotation](https://github.com/Wenlab/CeNDeR-annotation).
+**`2022-08-03`**:  We have released the training and inference method of our neuron recognition model via jupyter notebooks; we moved annotation and human proofreading toolkit into [CeNDeR-annotation](https://github.com/Wenlab/CeNDeR-annotation).
 
 **`2022-08-09`**:  We have released the CeNDeR 2.0 pipeline.
 
