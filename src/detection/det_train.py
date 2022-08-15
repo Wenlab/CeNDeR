@@ -220,7 +220,7 @@ if __name__ == '__main__':
     test_merge_results = xneuronalign_multiprocess(0.05, 1, {name: vol_peaks[name] for name in within_names}.copy(), label2merge_format({name: labels[name] for name in within_names}, within_sp))
     test_merge_f1_score = calc_merge_score_wlabel(test_merge_results, {name: labels[name] for name in within_names}.copy(),
                                                   sp = within_sp, threshold = args.merge_f1score_threshold, method = "F1SCORE")
-    print_info_message(f"Test Merge Within scores (labels) (precision, recall, f1 score): {test_merge_f1_score[0:3]}")
+    print_info_message(f"Test Merge Within scores (labels) (precision, recall, f1 score): {test_merge_f1_score[0]}")
 
     test_det_within_results = det_infer_main(args, {name: vol_peaks[name] for name in within_names})
     test_f1_score = calc_det_score_wlabel(test_det_within_results, labels = {name: labels[name] for name in within_names},
@@ -239,7 +239,7 @@ if __name__ == '__main__':
     test_merge_results = xneuronalign_multiprocess(0.05, 1, {name: vol_peaks[name] for name in across_names}.copy(), label2merge_format({name: labels[name] for name in across_names}, across_sp))
     test_merge_f1_score = calc_merge_score_wlabel(test_merge_results, {name: labels[name] for name in across_names}.copy(),
                                                   sp = {name: results[name][2][3][:2] for name in across_names}, threshold = args.merge_f1score_threshold, method = "F1SCORE")
-    print_info_message(f"Test Merge Within scores (labels) (precision, recall, f1 score): {test_merge_f1_score[0:3]}")
+    print_info_message(f"Test Merge Within scores (labels) (precision, recall, f1 score): {test_merge_f1_score[0]}")
 
     test_det_across_results = det_infer_main(args, {name: vol_peaks[name] for name in across_names})
     test_f1_score = calc_det_score_wlabel(test_det_across_results, labels = {name: labels[name] for name in across_names},
