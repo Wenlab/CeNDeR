@@ -61,6 +61,7 @@ def draw_volume_result(output, preprc_res, save_fig_root, name, verbose: bool = 
         plt.title(f"frame {idx + shift}")
         plt.axis('off')
         plt.margins(0, 0)
-    plt.savefig(f"{save_fig_root}/{name}.pdf")
+    if save_fig_root == "":
+        plt.savefig(f"{save_fig_root}/{name}.pdf")
     if verbose:
         plt.show()

@@ -12,6 +12,9 @@ Processing pipeline, dataset for “[*Rapid detection and recognition of whole b
 
 **`2022-08-09`**:  We have released the CeNDeR 2.0 pipeline.
 
+**`2022-08-13`**:  We have released the CeNDeR dataset and benchmarks.
+
+
 #### Introduction
 
 CeNDeR is a streamlined machine learning approach that rapidly detects and recognizes most head ganglion neurons and their calcium activity during animal movements. After learning from a small number
