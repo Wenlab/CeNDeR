@@ -74,6 +74,7 @@ benchmark_NeuroPAL_Chaudhary = {
 
 # Data and Network configs
 engineering_feature = {
+    "rec_z_scale"           : 1.0,
     "rec_worm_diagonal_line": 1.414,
     "rec_knn_k"             : 40,
     "rec_des_len"           : 10,
@@ -81,6 +82,7 @@ engineering_feature = {
 }
 
 engineering_feature4CeNDeR = {
+    "rec_z_scale"           : 1.0,
     "rec_worm_diagonal_line": 400.0,
     "rec_knn_k"             : 40,
     "rec_des_len"           : 10,

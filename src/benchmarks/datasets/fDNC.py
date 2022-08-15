@@ -118,7 +118,6 @@ def _save_rec_feature(params):
     name = _pad_name(name)
     root = root if "synthetic" not in root else os.path.join(root, "_".join(name.split("_")[:2]))
     os.makedirs(root, exist_ok = True)
-    print(os.path.join(root, name))
     np.save(os.path.join(root, name), res.astype(np.float16) if is_fp16 else res.astype(np.float32))
 
 

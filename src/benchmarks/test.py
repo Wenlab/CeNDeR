@@ -21,23 +21,6 @@ from src.benchmarks.configs import CeNDeR as config_cender
 from src.benchmarks.datasets.fDNC import Dataset_fDNC, collate_fn_volumes
 from src.recognition.inference.network import RecFormer_Test
 
-"""
-    需要公开的数据
-    我们做benchmark的优势：
-        1. 有人工preprocessing； √
-        2. Leifer17年数据采用顺序，batch_size=32，中间的volume作为template √
-        3. 把test的数据也加到train里 √
-
-    可能的劣势：
-        1. 网络训练时是某个volume和reference volume合成一个生成embedding vector，所以infer时只包含需要infer的volume，而没有reference volume可能会吃亏
-                果然吃亏，精度平均降10%
-        2. fea vec无法在每个epoch都random rotation一次
-
-    需要做的实验：
-    1. Conformer 
-    2. Conformer + fea + 
-"""
-
 
 def find_match(label2, label1):
     """https://github.com/XinweiYu/fDNC_Neuron_ID/blob/master/src/model.py#L11-L29"""

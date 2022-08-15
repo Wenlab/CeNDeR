@@ -136,3 +136,17 @@ def make_training_samples(params):
         samples.append(sample)
 
     return samples
+
+
+def label2merge_format(label, sp):
+    label_res = {name: [[l[1] - sp[name][0], l[2] - sp[name][1], l[3] - sp[name][0], l[4] - sp[name][1], l[0]] for ll in lll.values() for l in ll] for name, lll in label.items()}
+
+    for key, lab in label_res.items():
+        lab = np.array(lab)
+        res = list()
+        for i in np.unique(lab[:, -1]):
+            idx = np.where(lab[:, -1] == i)
+            res.append(lab[idx])
+        label_res[key] = res
+
+    return label_res

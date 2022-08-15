@@ -361,59 +361,7 @@ if __name__ == '__main__':
     model = model.half() if args.rec_fp16 else model
     if os.path.isfile(args.rec_model_load_path):
         model.load_state_dict(torch.load(args.rec_model_load_path, map_location = 'cuda:0')['network'])
-
-    # model.eval()
-    # results = OrderedDict()
-    # results.update({name: [[], []] for name in trains[-1]})  # embedding, id
-    # with torch.inference_mode():
-    #     for idx, (names, feas, ids) in enumerate(train_dataloader):
-    #         embeds, _ = model(feas.cuda(), mode = 1)
-    #         for embed, name, _id, in zip(embeds.detach().cpu().numpy(), names[0], ids):
-    #             if _id != processing_ids[-1]:
-    #                 results[name][0].append(embed)
-    #                 results[name][1].append(_id)
-    #
-    # for vol_name, (vol_pred, vol_label) in results.items():
-    #     nd_pred, nd_label = np.array(vol_pred), np.array(vol_label)
-    #     results[vol_name] = [nd_pred, nd_label]
-    #
-    # np.save("/home/cbmi/wyx/CenDer_PLOS_CompBio/notebooks/train", results)
-    #
-    # model.eval()
-    # results = OrderedDict()
-    # results.update({name: [[], []] for name in vals[-1]})  # embedding, id
-    # with torch.inference_mode():
-    #     for idx, (names, feas, ids) in enumerate(val_dataloader):
-    #         embeds, _ = model(feas.cuda(), mode = 1)
-    #         for embed, name, _id, in zip(embeds.detach().cpu().numpy(), names[0], ids):
-    #             if _id != processing_ids[-1]:
-    #                 results[name][0].append(embed)
-    #                 results[name][1].append(_id)
-    #
-    # for vol_name, (vol_pred, vol_label) in results.items():
-    #     nd_pred, nd_label = np.array(vol_pred), np.array(vol_label)
-    #     results[vol_name] = [nd_pred, nd_label]
-    #
-    # np.save("/home/cbmi/wyx/CenDer_PLOS_CompBio/notebooks/val", results)
-    #
-    # model.eval()
-    # results = OrderedDict()
-    # results.update({name: [[], []] for name in tests[-1]})  # embedding, id
-    # with torch.inference_mode():
-    #     for idx, (names, feas, ids) in enumerate(within_test_dataloader):
-    #         embeds, _ = model(feas.cuda(), mode = 1)
-    #         for embed, name, _id, in zip(embeds.detach().cpu().numpy(), names[0], ids):
-    #             if _id != processing_ids[-1]:
-    #                 results[name][0].append(embed)
-    #                 results[name][1].append(_id)
-    #
-    # for vol_name, (vol_pred, vol_label) in results.items():
-    #     nd_pred, nd_label = np.array(vol_pred), np.array(vol_label)
-    #     results[vol_name] = [nd_pred, nd_label]
-    #
-    # np.save("/home/cbmi/wyx/CenDer_PLOS_CompBio/notebooks/test", results)
-    #
-    # exit(-1)
+    os.makedirs(args.rec_model_save_path, exist_ok = True)
 
     criterion = RecMarginalCosLossNetwork(len_embedding = args.rec_len_embedding, coefficients = args.rec_loss_coefficients, hypersphere_radius = args.rec_hypersphere_radius).cuda()
     criterion = criterion.half() if args.rec_fp16 else criterion

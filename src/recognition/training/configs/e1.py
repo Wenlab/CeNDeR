@@ -82,6 +82,7 @@ method = {
         "unit"                  : 0.3,
     },
     "fea_ves_setup_fDNC4CeNDeR": {
+        "rec_z_scale"           : 1,
         "rec_worm_diagonal_line": 400.0,
         "rec_knn_k"             : 25,
         "rec_des_len"           : 20,

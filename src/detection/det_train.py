@@ -23,7 +23,7 @@ from src.preprocessing.pp_infer import auto_preprocess
 from src.preprocessing.training.utils import extract_annos
 from src.detection.inference.dataset import InferringNeuronDataset
 from src.detection.det_infer import nms_multiprocess, det_infer_main
-from src.detection.training.det_train_utils import TrainingNeuronDataset
+from src.detection.training.det_train_utils import TrainingNeuronDataset, label2merge_format
 from src.detection.inference.bbox_regression_utils import calc_predicted_bbox, filter_bboxes_by_area
 from src.detection.inference.local_peak import parse_volume_peaks_multiprocess
 from src.detection.inference.network import MFDetectNetworkModule41, wing_loss
@@ -215,46 +215,38 @@ if __name__ == '__main__':
 
     # ----------- Test -----------
     # ----------- Within -----------
-    # within_names = list(w6_labels.keys())
-
-    # np.save("/home/cbmi/wyx/CenDer_PLOS_CompBio/notebooks/debug/within_vol_peaks", {name: vol_peaks[name] for name in within_names})
-    # np.save("/home/cbmi/wyx/CenDer_PLOS_CompBio/notebooks/debug/within_labels", {name: labels[name] for name in within_names})
-    # np.save("/home/cbmi/wyx/CenDer_PLOS_CompBio/notebooks/debug/within_sp", {name: results[name][2][3][:2] for name in within_names})
-    # np.save("/home/cbmi/wyx/CenDer_PLOS_CompBio/notebooks/debug/within_det_res", test_det_within_results)
-
-    # test_merge_results = xneuronalign_multiprocess(0.05, 1, {name: vol_peaks[name] for name in within_names}.copy(), {name: list(labels[name].values()) for name in within_names})
-    # test_merge_f1_score = calc_merge_score_wlabel(test_merge_results, {name: labels[name] for name in within_names}.copy(),
-    #                                               sp = {name: results[name][2][3][:2] for name in within_names}, threshold = args.merge_f1score_threshold, method = "F1SCORE")
-    # print_info_message(f"Test Merge Within scores (labels) (precision, recall, f1 score): {test_merge_f1_score[0:3]}")
     within_names = dataset_names[2]
+    within_sp = {name: results[name][2][3][:2] for name in within_names}
+    test_merge_results = xneuronalign_multiprocess(0.05, 1, {name: vol_peaks[name] for name in within_names}.copy(), label2merge_format({name: labels[name] for name in within_names}, within_sp))
+    test_merge_f1_score = calc_merge_score_wlabel(test_merge_results, {name: labels[name] for name in within_names}.copy(),
+                                                  sp = within_sp, threshold = args.merge_f1score_threshold, method = "F1SCORE")
+    print_info_message(f"Test Merge Within scores (labels) (precision, recall, f1 score): {test_merge_f1_score[0:3]}")
+
     test_det_within_results = det_infer_main(args, {name: vol_peaks[name] for name in within_names})
     test_f1_score = calc_det_score_wlabel(test_det_within_results, labels = {name: labels[name] for name in within_names},
-                                          sp = {name: results[name][2][3][:2] for name in within_names}, threshold = args.det_f1score_threshold)
+                                          sp = within_sp, threshold = args.det_f1score_threshold)
     print_info_message(f"Test Detection Within scores (precision, recall, f1 score): {test_f1_score[0:3]}")
 
     test_merge_results = xneuronalign_multiprocess(0.05, 1, {name: vol_peaks[name] for name in within_names}.copy(), test_det_within_results)
     test_merge_f1_score = calc_merge_score_wlabel(test_merge_results, {name: labels[name] for name in within_names}.copy(),
-                                                  sp = {name: results[name][2][3][:2] for name in within_names}, threshold = args.merge_f1score_threshold, method = "F1SCORE")
+                                                  sp = within_sp, threshold = args.merge_f1score_threshold, method = "F1SCORE")
     print_info_message(f"Test Merge Within scores (prediction) (precision, recall, f1 score): {test_merge_f1_score[0]}")
 
     # ----------- Across -----------
     across_names = list(w2_labels.keys()) + list(w4_labels.keys())
+    across_sp = {name: results[name][2][3][:2] for name in across_names}
+
+    test_merge_results = xneuronalign_multiprocess(0.05, 1, {name: vol_peaks[name] for name in across_names}.copy(), label2merge_format({name: labels[name] for name in across_names}, across_sp))
+    test_merge_f1_score = calc_merge_score_wlabel(test_merge_results, {name: labels[name] for name in across_names}.copy(),
+                                                  sp = {name: results[name][2][3][:2] for name in across_names}, threshold = args.merge_f1score_threshold, method = "F1SCORE")
+    print_info_message(f"Test Merge Within scores (labels) (precision, recall, f1 score): {test_merge_f1_score[0:3]}")
+
     test_det_across_results = det_infer_main(args, {name: vol_peaks[name] for name in across_names})
     test_f1_score = calc_det_score_wlabel(test_det_across_results, labels = {name: labels[name] for name in across_names},
-                                          sp = {name: results[name][2][3][:2] for name in across_names}, threshold = args.det_f1score_threshold)
+                                          sp = across_sp, threshold = args.det_f1score_threshold)
     print_info_message(f"Test Detection Across scores (precision, recall, f1 score): {test_f1_score[0:3]}")
-
-    # np.save("/home/cbmi/wyx/CenDer_PLOS_CompBio/notebooks/debug/across_vol_peaks", {name: vol_peaks[name] for name in across_names})
-    # np.save("/home/cbmi/wyx/CenDer_PLOS_CompBio/notebooks/debug/across_labels", {name: labels[name] for name in across_names})
-    # np.save("/home/cbmi/wyx/CenDer_PLOS_CompBio/notebooks/debug/across_sp", {name: results[name][2][3][:2] for name in across_names})
-    # np.save("/home/cbmi/wyx/CenDer_PLOS_CompBio/notebooks/debug/across_det_res", test_det_across_results)
-
-    # test_merge_results = xneuronalign_multiprocess(0.05, 1, {name: vol_peaks[name] for name in across_names}.copy(), {name: list(labels[name].values()) for name in across_names})
-    # test_merge_f1_score = calc_merge_score_wlabel(test_merge_results, {name: labels[name] for name in across_names}.copy(),
-    #                                               sp = {name: results[name][2][3][:2] for name in across_names}, threshold = args.merge_f1score_threshold, method = "F1SCORE")
-    # print_info_message(f"Test Merge Within scores (labels) (precision, recall, f1 score): {test_merge_f1_score[0:3]}")
 
     test_merge_results = xneuronalign_multiprocess(0.05, 1, {name: vol_peaks[name] for name in across_names}.copy(), test_det_across_results)
     test_merge_f1_score = calc_merge_score_wlabel(test_merge_results, {name: labels[name] for name in across_names}.copy(),
-                                                  sp = {name: results[name][2][3][:2] for name in across_names}, threshold = args.merge_f1score_threshold, method = "F1SCORE")
+                                                  sp = across_sp, threshold = args.merge_f1score_threshold, method = "F1SCORE")
     print_info_message(f"Test Merge Across scores (prediction) (precision, recall, f1 score): {test_merge_f1_score[0]}")

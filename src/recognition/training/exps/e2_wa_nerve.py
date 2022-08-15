@@ -202,26 +202,26 @@ if __name__ == '__main__':
         model.load_state_dict(torch.load(args.rec_model_load_path, map_location = 'cuda:0')['network'])
     model = model.half() if args.rec_fp16 else model
 
-    # criterion = RecMarginalCosLossNetwork(len_embedding = args.rec_len_embedding, coefficients = args.rec_loss_coefficients, hypersphere_radius = args.rec_hypersphere_radius).cuda()
-    # criterion = criterion.half() if args.rec_fp16 else criterion
-    # os.makedirs(os.path.join(args.rec_model_save_path), exist_ok = True)
-    #
-    # train_val_procedure(model = model,
-    #                     criterion = criterion,
-    #                     train_dataloader = train_dataloader,
-    #                     val_dataloader = val_dataloader,
-    #                     test_dataloader = test_dataloader,
-    #                     test_names = tds.names,
-    #                     batch_size = args.rec_batch_size,
-    #                     optimizer = torch.optim.Adam(model.parameters(), lr = 1e-3),
-    #                     is_fp16 = args.rec_fp16,
-    #                     num_ids = len(cfg.id_map),
-    #                     hr = args.rec_hypersphere_radius,
-    #                     num_epochs = args.rec_epoch,
-    #                     checkpoint_timestamp = args.checkpoint_timestamp,
-    #                     tb_writer = SummaryWriter(os.path.join(args.rec_tensorboard_root, args.checkpoint_timestamp)),
-    #                     model_save_path = os.path.join(args.rec_model_save_path, f"{args.checkpoint_timestamp}.ckpt"),
-    #                     )
+    criterion = RecMarginalCosLossNetwork(len_embedding = args.rec_len_embedding, coefficients = args.rec_loss_coefficients, hypersphere_radius = args.rec_hypersphere_radius).cuda()
+    criterion = criterion.half() if args.rec_fp16 else criterion
+    os.makedirs(os.path.join(args.rec_model_save_path), exist_ok = True)
+
+    train_val_procedure(model = model,
+                        criterion = criterion,
+                        train_dataloader = train_dataloader,
+                        val_dataloader = val_dataloader,
+                        test_dataloader = test_dataloader,
+                        test_names = tds.names,
+                        batch_size = args.rec_batch_size,
+                        optimizer = torch.optim.Adam(model.parameters(), lr = 1e-3),
+                        is_fp16 = args.rec_fp16,
+                        num_ids = len(cfg.id_map),
+                        hr = args.rec_hypersphere_radius,
+                        num_epochs = args.rec_epoch,
+                        checkpoint_timestamp = args.checkpoint_timestamp,
+                        tb_writer = SummaryWriter(os.path.join(args.rec_tensorboard_root, args.checkpoint_timestamp)),
+                        model_save_path = os.path.join(args.rec_model_save_path, f"{args.checkpoint_timestamp}.ckpt"),
+                        )
 
     # ==========  evaluate benchmarks  ====================
     batch_size = 32

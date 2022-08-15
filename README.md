@@ -8,13 +8,13 @@ Processing pipeline, dataset for “[*Rapid detection and recognition of whole b
 
 **`2022-02-15`**:  We have fixed Memory problem for long-term recording inference.
 
-**`2022-08-03`**:  We have released inference and recognition training jupyter notebooks, and moved annotation and human proofreading toolkit into [CeNDeR-annotation](https://github.com/Wenlab/CeNDeR-annotation).
+**`2022-08-03`**:  We have released the training and inference method of our neuron recognition model via jupyter notebooks; we moved annotation and human proofreading toolkit into [CeNDeR-annotation](https://github.com/Wenlab/CeNDeR-annotation).
 
-**`2022-08-09`**:  We have released CeNDeR 2.0 procedure.
+**`2022-08-09`**:  We have released the CeNDeR 2.0 pipeline.
 
 #### Introduction
 
-CenDer is a streamlined machine learning approach that rapidly detects and recognizes most head ganglion neurons and their calcium activity during animal movements. After learning from a small number
+CeNDeR is a streamlined machine learning approach that rapidly detects and recognizes most head ganglion neurons and their calcium activity during animal movements. After learning from a small number
 of human-annotated examples, a GPU machine is able to process each imaging volume - 1024 x 1024 x 18 in voxels - in less than 1 second and achieves an accuracy of 91% in neuronal detection and above 80% in
 neuronal tracking over a long video recording.. Our paper website: [https://arxiv.org/abs/2109.10474](https://arxiv.org/abs/2109.10474).
 
@@ -39,7 +39,7 @@ bash inference.sh
 
 You can also view [Jupyter notebook](https://github.com/Wenlab/C.elegans-Neuron-Recognition-Algorithm/blob/master/inference.ipynb) (if you can't open it, please check [Nbviewer](https://nbviewer.org/github/Wenlab/CeNDeR/blob/main/inference.ipynb))
 
-Here we show one volume result:
+Here we show one volume result (You can check [Google Drive]( https://drive.google.com/drive/folders/1eLU61i9GbfhekJA_57qhqvfkICDNTcCs?usp=sharing) for more results):
 
 ![result](figs/result.png)
 </details>
@@ -82,7 +82,7 @@ python src/detection/det_train.py
 Recognition training example:
 
 ```shell
-# CeNDeR dataset
+# training in CeNDeR dataset
 python src/benchmarks/datasets/fDNC.py --mode 0
 python src/recognition/training/exps/e1.py
 ```
@@ -90,10 +90,10 @@ python src/recognition/training/exps/e1.py
 You can also view [Jupyter notebook](https://github.com/Wenlab/C.elegans-Neuron-Recognition-Algorithm/blob/master/recognition.ipynb) (if you can't open it, please check [Nbviewer](https://nbviewer.org/github/Wenlab/CeNDeR/blob/main/recognition.ipynb))
 
 ```shell
-# NeRVE dataset
+# training in NeRVE dataset
 python src/benchmarks/datasets/fDNC.py --mode 1
 python src/benchmarks/datasets/CeNDeR.py --mode 1
-python src/recognition/training/exps/e1.py
+python src/recognition/training/exps/e2_wa_nerve.py
 ```
 
 Check [TensorBoard](https://www.tensorflow.org/tensorboard) for training details.
