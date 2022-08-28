@@ -53,7 +53,7 @@ def draw_volume_result(output, preprc_res, save_fig_root, name, verbose: bool = 
             for reg in neuron:
                 if reg[-1] == idx:
                     plt.gca().add_patch(plt.Rectangle((reg[0], reg[1]), reg[2] - reg[0], reg[3] - reg[1], linewidth = 1, edgecolor = 'r', facecolor = "None"))
-                    plt.text((reg[0] + reg[2]) * 0.5, (reg[1] + reg[3]) * 0.5, s = str(_id + shift) if _id >= others_class_start_id else "-1",
+                    plt.text((reg[0] + reg[2]) * 0.5, (reg[1] + reg[3]) * 0.5, s = str(_id + shift) if _id < others_class_start_id else "-1",
                              verticalalignment = 'center', horizontalalignment = 'center',
                              fontdict = {"color": "blue", "fontsize": 4, "weight": "bold"})
 
@@ -61,7 +61,7 @@ def draw_volume_result(output, preprc_res, save_fig_root, name, verbose: bool = 
         plt.title(f"frame {idx + shift}")
         plt.axis('off')
         plt.margins(0, 0)
-    if save_fig_root == "":
+    if save_fig_root != "":
         plt.savefig(f"{save_fig_root}/{name}.pdf")
     if verbose:
         plt.show()
