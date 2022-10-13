@@ -19,7 +19,7 @@ Processing pipeline, dataset for “[*Rapid detection and recognition of whole b
 
 CeNDeR is a streamlined machine learning approach that rapidly detects and recognizes most head ganglion neurons and their calcium activity during animal movements. After learning from a small number
 of human-annotated examples, a GPU machine is able to process each imaging volume - 1024 x 1024 x 18 in voxels - in less than 1 second and achieves an accuracy of 91% in neuronal detection and above 80% in
-neuronal tracking over a long video recording.. Our paper website: [https://arxiv.org/abs/2109.10474](https://arxiv.org/abs/2109.10474).
+neuronal tracking over a long video recording. Our paper website: [https://doi.org/10.1371/journal.pcbi.1010594](https://doi.org/10.1371/journal.pcbi.1010594).
 
 ![](figs/pipeline.png)
 
