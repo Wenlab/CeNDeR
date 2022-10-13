@@ -1,6 +1,6 @@
 # CeNDeR
 
-Processing pipeline, dataset for “[*Rapid detection and recognition of whole brain activity in a freely behaving Caenorhabditis elegans*](https://arxiv.org/abs/2109.10474)”
+Processing pipeline, dataset for “[*Rapid detection and recognition of whole brain activity in a freely behaving Caenorhabditis elegans*](https://doi.org/10.1371/journal.pcbi.1010594)”
 
 #### Top News
 
