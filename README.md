@@ -14,6 +14,9 @@ Processing pipeline, dataset for “[*Rapid detection and recognition of whole b
 
 **`2022-08-13`**:  We have released the CeNDeR dataset and benchmarks.
 
+**`2023-08-11`**:  We have released the CeNDeR demo video on [YouTube](https://www.youtube.com/watch?v=iiS8wWWmbh4).
+
+
 
 #### Introduction
 
